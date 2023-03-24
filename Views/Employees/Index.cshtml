@@ -1,0 +1,49 @@
+﻿@*using view model to pass 2 models to the views from controller*@
+
+@model TylerTech.Models.Empvmodel
+@{
+    ViewBag.Title = "Index";
+}
+<br>
+<br>
+<div align="center">
+    @using (Html.BeginForm("Search", "Employees", FormMethod.Post, new { @class = "my-form" }))
+    {
+        @Html.DropDownListFor(model => model.employee.ManagerName, new SelectList(ViewBag.list), "Select a manager", new { @class = "my-dropdown" })
+        <button style="width: 55px; height: 25px;" type="submit" class="my-button">Submit</button>
+    }
+</div>
+<br>
+<h4> </h4>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.employee.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employee.Firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.employee.Roles)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.emplist)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Roles)
+            </td>
+        </tr>
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Add Employee", "Create", "Employees", null, new { @class = "btn btn-primary", role = "button" })
+</p>
